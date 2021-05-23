@@ -14,18 +14,76 @@ namespace BTLWin
     public partial class TaiKhoan_Form : Form
     {
         string username, password, id;
+        int accountType;
         bool save = true;
         public TaiKhoan_Form()
         {
             InitializeComponent();
         }
 
-        public TaiKhoan_Form(string username, string password, string id)
+        public TaiKhoan_Form(string username, string password, string id, int accountType)
         {
             InitializeComponent();
             this.username = username;
             this.password = password;
             this.id = id;
+            this.accountType = accountType;
+        }
+
+        //Set thuộc tính enable của các textBox, dateTimePicker, combo box = true hoặc false
+        private void edit(bool e)
+        {
+            txtHoTen.Enabled = e;
+            dateNgaySinh.Enabled = e;
+            cbGioiTinh.Enabled = e;
+            txtDiaChi.Enabled = e;
+            txtDienThoai.Enabled = e;
+            txtMatKhau.Enabled = e;
+            btn_Luu.Visible = e;
+            btn_Huy.Visible = e;
+            btn_Update.Visible = !e;
+        }
+
+        private void LoadData()
+        {
+            try
+            {
+                if(accountType == 0)
+                {
+                    dataGridView1.DataSource = new Database().SelectData("EXEC TimKiemMonHoc_TheoMaGV '" + username + "'");
+                    DataTable dt = new Database().SelectData("EXEC TimKiem_GIangVien '" + id + "'");
+                    dateNgaySinh.MaxDate = DateTime.Now;
+                    dateNgaySinh.Value = DateTime.Parse(dt.Rows[0][2].ToString());
+                    txtMaGV.Text = dt.Rows[0][0].ToString();
+                    txtHoTen.Text = dt.Rows[0][1].ToString();
+                    txtDiaChi.Text = dt.Rows[0][4].ToString();
+                    txtDienThoai.Text = dt.Rows[0][5].ToString();
+                    txtDangNhap.Text = username;
+                    cbGioiTinh.Text = dt.Rows[0][3].ToString();
+                    DataTable dt2 = new Database().SelectData("SELECT * FROM TAIKHOANGV WHERE TaiKhoan = '" + username + "'");
+                    txtMatKhau.Text = dt2.Rows[0][1].ToString();
+                }
+                else if(accountType == 1)
+                {
+                    DataTable dt = new Database().SelectData("EXEC TimKiem_SinhVien '" + id + "'");
+                    dateNgaySinh.MaxDate = DateTime.Now;
+                    dateNgaySinh.Value = DateTime.Parse(dt.Rows[0][2].ToString());
+                    txtMaGV.Text = dt.Rows[0][0].ToString();
+                    txtHoTen.Text = dt.Rows[0][1].ToString();
+                    txtDiaChi.Text = dt.Rows[0][4].ToString();
+                    txtDienThoai.Text = dt.Rows[0][5].ToString();
+                    cbGioiTinh.Text = dt.Rows[0][3].ToString();
+                    txtMaLop.Text = dt.Rows[0][6].ToString();
+                    txtDangNhap.Text = username;
+                    DataTable dt2 = new Database().SelectData("SELECT * FROM TAIKHOANSV WHERE TaiKhoan = '" + username + "'");
+                    txtMatKhau.Text = dt2.Rows[0][1].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         private void btn_Update_Click(object sender, EventArgs e)
@@ -64,16 +122,33 @@ namespace BTLWin
             {
                 string date = dateNgaySinh.Value.ToString("yyyy/MM/dd");
                 string gioitinh = cbGioiTinh.Text;
-                int rowEffected = new Database().ExecCmd("EXEC Update_GiangVien '" + txtMaGV.Text + "', N'" + txtHoTen.Text + "', '"
+                if(accountType == 0)
+                {
+                    int rowEffected = new Database().ExecCmd("EXEC Update_GiangVien '" + txtMaGV.Text + "', N'" + txtHoTen.Text + "', '"
                     + date + "', N'" + gioitinh + "', N'" + txtDiaChi.Text + "', '" + txtDienThoai.Text + "', '" + txtMatKhau.Text + "'");
 
-                if (rowEffected != 0)
-                {
-                    MessageBox.Show("Cập nhập thành công", "Thông báo");
+                    if (rowEffected != 0)
+                    {
+                        MessageBox.Show("Cập nhập thành công", "Thông báo");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cập nhập thất bại", "Thông báo");
+                    }
                 }
-                else
+                else if(accountType == 1)
                 {
-                    MessageBox.Show("Cập nhập thất bại", "Thông báo");
+                    int rowEffected = new Database().ExecCmd("EXEC Update_SinhVien '" + txtMaGV.Text + "', N'" + txtHoTen.Text + "', '"
+                    + date + "', N'" + gioitinh + "', N'" + txtDiaChi.Text + "', '" + txtDienThoai.Text + "', '" + txtMatKhau.Text + "'");
+
+                    if (rowEffected != 0)
+                    {
+                        MessageBox.Show("Cập nhập thành công", "Thông báo");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cập nhập thất bại", "Thông báo");
+                    }
                 }
             }
             LoadData();
@@ -102,6 +177,15 @@ namespace BTLWin
         {
             //Mặc định các textBox, dateTimePicker, comboBox chỉ để xem
             dateNgaySinh.MaxDate = DateTime.Now;
+            if(accountType== 1)
+            {
+                lblMaLop.Visible = true;
+                txtMaLop.Visible = true;
+                panMaLop.Visible = true;
+                dataGridView1.Visible = false;
+                lblMonHoc.Visible = false;
+            }
+            
             LoadData();
         }
 
@@ -140,35 +224,6 @@ namespace BTLWin
             textValidating(sender, e, errorProvider4);
         }
 
-        //Set thuộc tính enable của các textBox, dateTimePicker, combo box = true hoặc false
-        private void edit(bool e)
-        {
-            txtHoTen.Enabled = e;
-            dateNgaySinh.Enabled = e;
-            cbGioiTinh.Enabled = e;
-            txtDiaChi.Enabled = e;
-            txtDienThoai.Enabled = e;
-            txtMatKhau.Enabled = e;
-            btn_Luu.Visible = e;
-            btn_Huy.Visible = e;
-            btn_Update.Visible = !e;
-        }
-
-        private void LoadData()
-        {
-            dataGridView1.DataSource = new Database().SelectData("EXEC TimKiemMonHoc_TheoMaGV '" + username + "'");
-            DataTable dt = new Database().SelectData("EXEC TimKiem_GIangVien '" + id + "'");
-            dateNgaySinh.MaxDate = DateTime.Now;
-            dateNgaySinh.Value = DateTime.Parse(dt.Rows[0][2].ToString());
-            txtMaGV.Text = dt.Rows[0][0].ToString();
-            txtHoTen.Text = dt.Rows[0][1].ToString();
-            txtDiaChi.Text = dt.Rows[0][4].ToString();
-            txtDienThoai.Text = dt.Rows[0][5].ToString();
-            txtDangNhap.Text = username;
-            txtMatKhau.Text = password;
-            cbGioiTinh.Text = dt.Rows[0][3].ToString();
-            DataTable dt2 = new Database().SelectData("SELECT * FROM TAIKHOANGV WHERE TaiKhoan = '" + username + "'");
-            txtMatKhau.Text = dt2.Rows[0][1].ToString();
-        }
+       
     }
 }

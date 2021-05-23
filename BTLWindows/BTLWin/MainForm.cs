@@ -118,7 +118,7 @@ namespace BTLWin
                     btnTrangChu.Visible = false;
                     btnGiangVien_Submenu.Visible = false;
                     btnQuanLy.Text = "Tra cứu điểm";
-                    activeChildForm(new XemDiem_Form());
+                    activeChildForm(new XemDiem_Form(userName, password, id));
                     activeButton(btnQuanLy, Color.CadetBlue);
                 }
                 else if(accountType == 2)
@@ -243,6 +243,34 @@ namespace BTLWin
             activeChildForm(new TrangChu_Form(id));
         }
 
+        private void btnQuanLy_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (accountType)
+                {
+                    case 0:
+                        activeButton(sender, Color.CadetBlue);
+                        activeChildForm(new QuanLyDiem(userName, password, id));
+                        break;
+                    case 1:
+                        activeButton(sender, Color.CadetBlue);
+                        activeChildForm(new XemDiem_Form(userName, password, id));
+                        break;
+                    case 2:
+                        activeButton(sender, Color.CadetBlue);
+                        activeChildForm(new QuanLyTaiKhoan_Form());
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void btnDangXuat_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -257,26 +285,25 @@ namespace BTLWin
         }
         private void btnTaiKhoan_Click(object sender, EventArgs e)
         {
-            activeButton(sender, Color.LightSeaGreen);
-            activeChildForm(new TaiKhoan_Form(this.userName, this.password, this.id));
-            if(accountType == 2)
+            switch (accountType)
             {
-                if(btnQuanLyTK.Visible)
-                {
-                    btnQuanLyTK.Visible = false;
-                }
-                else
-                {
-                    btnQuanLyTK.Visible = true;
-                }
-            }    
+                case 0:
+                    activeButton(sender, Color.LightSeaGreen);
+                    activeChildForm(new TaiKhoan_Form(this.userName, this.password, this.id, this.accountType));
+                    break;
+                case 1:
+                    activeButton(sender, Color.LightSeaGreen);
+                    activeChildForm(new TaiKhoan_Form(this.userName, this.password, this.id, this.accountType));
+                    break;
+                case 2:
+                    activeButton(sender, Color.LightSeaGreen);
+                    activeChildForm(new QuanLyTaiKhoan_Form());
+                    break;
+                default:
+                    break;
+            }
         }
-
-        private void btnQuanLy_Click(object sender, EventArgs e)
-        {
-            activeButton(sender, Color.LightSeaGreen);
-            activeChildForm(new QuanLyDiem(userName, password, id));
-        }
+     
 
         public void disableButton()
         {
@@ -289,11 +316,5 @@ namespace BTLWin
                 //Màu mặc định của các button trong submenu 
             }    
         }
-
-        private void btnQuanLyTK_Submenu_Click(object sender, EventArgs e)
-        {
-            activeButton(sender, Color.CadetBlue);
-        }
-
     }
 }

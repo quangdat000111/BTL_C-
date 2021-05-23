@@ -38,6 +38,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblSoLuong = new System.Windows.Forms.Label();
+            this.lblSo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -55,22 +57,24 @@
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 237);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 222);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1178, 575);
+            this.dataGridView1.Size = new System.Drawing.Size(1767, 1046);
             this.dataGridView1.TabIndex = 3;
             // 
             // lblTimKiem
             // 
             this.lblTimKiem.AutoSize = true;
-            this.lblTimKiem.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTimKiem.Location = new System.Drawing.Point(12, 113);
+            this.lblTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTimKiem.Location = new System.Drawing.Point(19, 101);
+            this.lblTimKiem.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTimKiem.Name = "lblTimKiem";
-            this.lblTimKiem.Size = new System.Drawing.Size(282, 23);
+            this.lblTimKiem.Size = new System.Drawing.Size(260, 25);
             this.lblTimKiem.TabIndex = 0;
             this.lblTimKiem.Text = "Tìm kiếm theo mã giảng viên";
             // 
@@ -78,20 +82,21 @@
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(16, 161);
+            this.textBox1.Location = new System.Drawing.Point(24, 131);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox1.MaxLength = 24;
-            this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.textBox1.Size = new System.Drawing.Size(343, 30);
+            this.textBox1.Size = new System.Drawing.Size(356, 21);
             this.textBox1.TabIndex = 0;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.panel1.Location = new System.Drawing.Point(16, 197);
+            this.panel1.Location = new System.Drawing.Point(24, 155);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(343, 1);
+            this.panel1.Size = new System.Drawing.Size(356, 2);
             this.panel1.TabIndex = 2;
             // 
             // btnTimKiem
@@ -99,12 +104,14 @@
             this.btnTimKiem.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnTimKiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTimKiem.Image = ((System.Drawing.Image)(resources.GetObject("btnTimKiem.Image")));
-            this.btnTimKiem.Location = new System.Drawing.Point(393, 157);
+            this.btnTimKiem.Location = new System.Drawing.Point(402, 123);
+            this.btnTimKiem.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.Size = new System.Drawing.Size(97, 41);
+            this.btnTimKiem.Size = new System.Drawing.Size(90, 34);
             this.btnTimKiem.TabIndex = 1;
             this.btnTimKiem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTimKiem.UseVisualStyleBackColor = false;
+            this.btnTimKiem.Visible = false;
             this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
             // btnHuyKQ
@@ -114,12 +121,14 @@
             this.btnHuyKQ.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHuyKQ.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHuyKQ.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnHuyKQ.Location = new System.Drawing.Point(496, 167);
+            this.btnHuyKQ.Location = new System.Drawing.Point(500, 123);
+            this.btnHuyKQ.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnHuyKQ.Name = "btnHuyKQ";
-            this.btnHuyKQ.Size = new System.Drawing.Size(197, 31);
+            this.btnHuyKQ.Size = new System.Drawing.Size(195, 34);
             this.btnHuyKQ.TabIndex = 2;
             this.btnHuyKQ.Text = "Hủy kết quả tìm kiếm";
             this.btnHuyKQ.UseVisualStyleBackColor = false;
+            this.btnHuyKQ.Visible = false;
             this.btnHuyKQ.Click += new System.EventHandler(this.btnHuyKQ_Click);
             // 
             // panel2
@@ -128,6 +137,7 @@
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(400, 68);
             this.panel2.TabIndex = 13;
@@ -135,29 +145,52 @@
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(121, 18);
+            this.label4.Location = new System.Drawing.Point(124, 20);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label4.Size = new System.Drawing.Size(276, 34);
+            this.label4.Size = new System.Drawing.Size(229, 36);
             this.label4.TabIndex = 11;
             this.label4.Text = "Tra cứu thông tin";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(4, 5);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(112, 60);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
+            // lblSoLuong
+            // 
+            this.lblSoLuong.AutoSize = true;
+            this.lblSoLuong.Location = new System.Drawing.Point(19, 182);
+            this.lblSoLuong.Name = "lblSoLuong";
+            this.lblSoLuong.Size = new System.Drawing.Size(90, 25);
+            this.lblSoLuong.TabIndex = 14;
+            this.lblSoLuong.Text = "Số lượng";
+            // 
+            // lblSo
+            // 
+            this.lblSo.AutoSize = true;
+            this.lblSo.Location = new System.Drawing.Point(253, 182);
+            this.lblSo.Name = "lblSo";
+            this.lblSo.Size = new System.Drawing.Size(90, 25);
+            this.lblSo.TabIndex = 14;
+            this.lblSo.Text = "Số lượng";
+            // 
             // TraCuu_Form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AcceptButton = this.btnTimKiem;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(1182, 824);
+            this.ClientSize = new System.Drawing.Size(1773, 1055);
+            this.Controls.Add(this.lblSo);
+            this.Controls.Add(this.lblSoLuong);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.btnHuyKQ);
             this.Controls.Add(this.dataGridView1);
@@ -165,6 +198,8 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lblTimKiem);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "TraCuu_Form";
             this.ShowInTaskbar = false;
             this.Text = "TraCuu_Form";
@@ -187,5 +222,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lblSoLuong;
+        private System.Windows.Forms.Label lblSo;
     }
 }

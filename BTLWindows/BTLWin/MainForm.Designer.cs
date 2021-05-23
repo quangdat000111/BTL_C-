@@ -29,12 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.btnMinimized = new System.Windows.Forms.Button();
-            this.btnMaximized = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
             this.panelChildForm = new System.Windows.Forms.Panel();
-            this.btnTrangChu = new System.Windows.Forms.Button();
-            this.btnTaiKhoan = new System.Windows.Forms.Button();
             this.btnDangXuat = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -49,57 +44,21 @@
             this.btnMonHoc_Submenu = new System.Windows.Forms.Button();
             this.btnTraCuu = new System.Windows.Forms.Button();
             this.btnQuanLy = new System.Windows.Forms.Button();
-            this.btnQuanLyTK = new System.Windows.Forms.Button();
+            this.btnTaiKhoan = new System.Windows.Forms.Button();
+            this.btnTrangChu = new System.Windows.Forms.Button();
             this.panelUser = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnMinimized = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnMaximized = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnMinimized
-            // 
-            this.btnMinimized.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMinimized.FlatAppearance.BorderSize = 0;
-            this.btnMinimized.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMinimized.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimized.Image")));
-            this.btnMinimized.Location = new System.Drawing.Point(1367, 0);
-            this.btnMinimized.Name = "btnMinimized";
-            this.btnMinimized.Size = new System.Drawing.Size(43, 30);
-            this.btnMinimized.TabIndex = 2;
-            this.btnMinimized.UseVisualStyleBackColor = true;
-            this.btnMinimized.Click += new System.EventHandler(this.btnMinimized_Click);
-            // 
-            // btnMaximized
-            // 
-            this.btnMaximized.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMaximized.BackColor = System.Drawing.Color.White;
-            this.btnMaximized.FlatAppearance.BorderSize = 0;
-            this.btnMaximized.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMaximized.Image = ((System.Drawing.Image)(resources.GetObject("btnMaximized.Image")));
-            this.btnMaximized.Location = new System.Drawing.Point(1411, 0);
-            this.btnMaximized.Name = "btnMaximized";
-            this.btnMaximized.Size = new System.Drawing.Size(43, 30);
-            this.btnMaximized.TabIndex = 3;
-            this.btnMaximized.UseVisualStyleBackColor = false;
-            this.btnMaximized.Click += new System.EventHandler(this.btnMaximized_Click);
-            // 
-            // btnExit
-            // 
-            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.FlatAppearance.BorderSize = 0;
-            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
-            this.btnExit.Location = new System.Drawing.Point(1455, 0);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(43, 30);
-            this.btnExit.TabIndex = 1;
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // panelChildForm
             // 
@@ -112,47 +71,6 @@
             this.panelChildForm.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.panelChildForm.Size = new System.Drawing.Size(1200, 871);
             this.panelChildForm.TabIndex = 5;
-            // 
-            // btnTrangChu
-            // 
-            this.btnTrangChu.BackColor = System.Drawing.Color.Teal;
-            this.btnTrangChu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnTrangChu.FlatAppearance.BorderSize = 0;
-            this.btnTrangChu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrangChu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrangChu.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnTrangChu.Image = ((System.Drawing.Image)(resources.GetObject("btnTrangChu.Image")));
-            this.btnTrangChu.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnTrangChu.Location = new System.Drawing.Point(0, 192);
-            this.btnTrangChu.Name = "btnTrangChu";
-            this.btnTrangChu.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
-            this.btnTrangChu.Size = new System.Drawing.Size(300, 60);
-            this.btnTrangChu.TabIndex = 2;
-            this.btnTrangChu.Text = "Trang chủ";
-            this.btnTrangChu.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnTrangChu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTrangChu.UseVisualStyleBackColor = false;
-            this.btnTrangChu.Click += new System.EventHandler(this.btnTrangChu_Click);
-            // 
-            // btnTaiKhoan
-            // 
-            this.btnTaiKhoan.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnTaiKhoan.FlatAppearance.BorderSize = 0;
-            this.btnTaiKhoan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTaiKhoan.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnTaiKhoan.Image = ((System.Drawing.Image)(resources.GetObject("btnTaiKhoan.Image")));
-            this.btnTaiKhoan.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnTaiKhoan.Location = new System.Drawing.Point(0, 252);
-            this.btnTaiKhoan.Name = "btnTaiKhoan";
-            this.btnTaiKhoan.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
-            this.btnTaiKhoan.Size = new System.Drawing.Size(300, 60);
-            this.btnTaiKhoan.TabIndex = 3;
-            this.btnTaiKhoan.Text = "Tài khoản";
-            this.btnTaiKhoan.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnTaiKhoan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTaiKhoan.UseVisualStyleBackColor = true;
-            this.btnTaiKhoan.Click += new System.EventHandler(this.btnTaiKhoan_Click);
             // 
             // btnDangXuat
             // 
@@ -176,7 +94,6 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.btnTraCuu);
             this.panel1.Controls.Add(this.btnQuanLy);
-            this.panel1.Controls.Add(this.btnQuanLyTK);
             this.panel1.Controls.Add(this.btnDangXuat);
             this.panel1.Controls.Add(this.btnTaiKhoan);
             this.panel1.Controls.Add(this.btnTrangChu);
@@ -192,7 +109,7 @@
             this.panel3.Controls.Add(this.btnFacebook_Submenu);
             this.panel3.Controls.Add(this.btnWebsite_Submenu);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 734);
+            this.panel3.Location = new System.Drawing.Point(0, 694);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(300, 83);
             this.panel3.TabIndex = 8;
@@ -242,7 +159,7 @@
             this.btnHoTro.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnHoTro.Image = ((System.Drawing.Image)(resources.GetObject("btnHoTro.Image")));
             this.btnHoTro.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnHoTro.Location = new System.Drawing.Point(0, 674);
+            this.btnHoTro.Location = new System.Drawing.Point(0, 634);
             this.btnHoTro.Name = "btnHoTro";
             this.btnHoTro.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
             this.btnHoTro.Size = new System.Drawing.Size(300, 60);
@@ -261,7 +178,7 @@
             this.panel2.Controls.Add(this.btnLopHoc_Submenu);
             this.panel2.Controls.Add(this.btnMonHoc_Submenu);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 472);
+            this.panel2.Location = new System.Drawing.Point(0, 432);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(300, 202);
             this.panel2.TabIndex = 9;
@@ -366,7 +283,7 @@
             this.btnTraCuu.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnTraCuu.Image = ((System.Drawing.Image)(resources.GetObject("btnTraCuu.Image")));
             this.btnTraCuu.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnTraCuu.Location = new System.Drawing.Point(0, 412);
+            this.btnTraCuu.Location = new System.Drawing.Point(0, 372);
             this.btnTraCuu.Name = "btnTraCuu";
             this.btnTraCuu.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
             this.btnTraCuu.Size = new System.Drawing.Size(300, 60);
@@ -386,7 +303,7 @@
             this.btnQuanLy.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnQuanLy.Image = ((System.Drawing.Image)(resources.GetObject("btnQuanLy.Image")));
             this.btnQuanLy.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnQuanLy.Location = new System.Drawing.Point(0, 352);
+            this.btnQuanLy.Location = new System.Drawing.Point(0, 312);
             this.btnQuanLy.Name = "btnQuanLy";
             this.btnQuanLy.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
             this.btnQuanLy.Size = new System.Drawing.Size(300, 60);
@@ -397,23 +314,46 @@
             this.btnQuanLy.UseVisualStyleBackColor = true;
             this.btnQuanLy.Click += new System.EventHandler(this.btnQuanLy_Click);
             // 
-            // btnQuanLyTK
+            // btnTaiKhoan
             // 
-            this.btnQuanLyTK.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.btnQuanLyTK.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnQuanLyTK.FlatAppearance.BorderSize = 0;
-            this.btnQuanLyTK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnQuanLyTK.ForeColor = System.Drawing.Color.White;
-            this.btnQuanLyTK.Location = new System.Drawing.Point(0, 312);
-            this.btnQuanLyTK.Name = "btnQuanLyTK";
-            this.btnQuanLyTK.Padding = new System.Windows.Forms.Padding(80, 0, 0, 0);
-            this.btnQuanLyTK.Size = new System.Drawing.Size(300, 40);
-            this.btnQuanLyTK.TabIndex = 4;
-            this.btnQuanLyTK.Text = "Quản lý tài khoản";
-            this.btnQuanLyTK.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnQuanLyTK.UseVisualStyleBackColor = false;
-            this.btnQuanLyTK.Visible = false;
-            this.btnQuanLyTK.Click += new System.EventHandler(this.btnQuanLyTK_Submenu_Click);
+            this.btnTaiKhoan.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnTaiKhoan.FlatAppearance.BorderSize = 0;
+            this.btnTaiKhoan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTaiKhoan.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnTaiKhoan.Image = ((System.Drawing.Image)(resources.GetObject("btnTaiKhoan.Image")));
+            this.btnTaiKhoan.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnTaiKhoan.Location = new System.Drawing.Point(0, 252);
+            this.btnTaiKhoan.Name = "btnTaiKhoan";
+            this.btnTaiKhoan.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btnTaiKhoan.Size = new System.Drawing.Size(300, 60);
+            this.btnTaiKhoan.TabIndex = 3;
+            this.btnTaiKhoan.Text = "Tài khoản";
+            this.btnTaiKhoan.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnTaiKhoan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnTaiKhoan.UseVisualStyleBackColor = true;
+            this.btnTaiKhoan.Click += new System.EventHandler(this.btnTaiKhoan_Click);
+            // 
+            // btnTrangChu
+            // 
+            this.btnTrangChu.BackColor = System.Drawing.Color.Teal;
+            this.btnTrangChu.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnTrangChu.FlatAppearance.BorderSize = 0;
+            this.btnTrangChu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrangChu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrangChu.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnTrangChu.Image = ((System.Drawing.Image)(resources.GetObject("btnTrangChu.Image")));
+            this.btnTrangChu.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnTrangChu.Location = new System.Drawing.Point(0, 192);
+            this.btnTrangChu.Name = "btnTrangChu";
+            this.btnTrangChu.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btnTrangChu.Size = new System.Drawing.Size(300, 60);
+            this.btnTrangChu.TabIndex = 2;
+            this.btnTrangChu.Text = "Trang chủ";
+            this.btnTrangChu.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnTrangChu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnTrangChu.UseVisualStyleBackColor = false;
+            this.btnTrangChu.Click += new System.EventHandler(this.btnTrangChu_Click);
             // 
             // panelUser
             // 
@@ -455,6 +395,46 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            // 
+            // btnMinimized
+            // 
+            this.btnMinimized.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMinimized.FlatAppearance.BorderSize = 0;
+            this.btnMinimized.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMinimized.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimized.Image")));
+            this.btnMinimized.Location = new System.Drawing.Point(1367, 0);
+            this.btnMinimized.Name = "btnMinimized";
+            this.btnMinimized.Size = new System.Drawing.Size(43, 30);
+            this.btnMinimized.TabIndex = 2;
+            this.btnMinimized.UseVisualStyleBackColor = true;
+            this.btnMinimized.Click += new System.EventHandler(this.btnMinimized_Click);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
+            this.btnExit.Location = new System.Drawing.Point(1455, 0);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(43, 30);
+            this.btnExit.TabIndex = 1;
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnMaximized
+            // 
+            this.btnMaximized.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMaximized.BackColor = System.Drawing.Color.White;
+            this.btnMaximized.FlatAppearance.BorderSize = 0;
+            this.btnMaximized.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMaximized.Image = ((System.Drawing.Image)(resources.GetObject("btnMaximized.Image")));
+            this.btnMaximized.Location = new System.Drawing.Point(1411, 0);
+            this.btnMaximized.Name = "btnMaximized";
+            this.btnMaximized.Size = new System.Drawing.Size(43, 30);
+            this.btnMaximized.TabIndex = 3;
+            this.btnMaximized.UseVisualStyleBackColor = false;
+            this.btnMaximized.Click += new System.EventHandler(this.btnMaximized_Click);
             // 
             // MainForm
             // 
@@ -510,7 +490,6 @@
         private System.Windows.Forms.Button btnMonHoc_Submenu;
         private System.Windows.Forms.Button btnTraCuu;
         private System.Windows.Forms.Button btnQuanLy;
-        private System.Windows.Forms.Button btnQuanLyTK;
     }
 }
 

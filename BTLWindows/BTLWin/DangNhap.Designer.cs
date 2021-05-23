@@ -208,7 +208,7 @@
             this.lblSaiTKorMK.AutoSize = true;
             this.lblSaiTKorMK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSaiTKorMK.ForeColor = System.Drawing.Color.Red;
-            this.lblSaiTKorMK.Location = new System.Drawing.Point(159, 484);
+            this.lblSaiTKorMK.Location = new System.Drawing.Point(159, 466);
             this.lblSaiTKorMK.Name = "lblSaiTKorMK";
             this.lblSaiTKorMK.Size = new System.Drawing.Size(262, 25);
             this.lblSaiTKorMK.TabIndex = 1;
@@ -223,16 +223,16 @@
             "Giảng viên",
             "Sinh viên",
             "Quản trị viên"});
-            this.comboBox1.Location = new System.Drawing.Point(248, 531);
+            this.comboBox1.Location = new System.Drawing.Point(247, 512);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(160, 28);
+            this.comboBox1.Size = new System.Drawing.Size(237, 28);
             this.comboBox1.TabIndex = 15;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(97, 534);
+            this.label1.Location = new System.Drawing.Point(96, 515);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(113, 20);
             this.label1.TabIndex = 16;

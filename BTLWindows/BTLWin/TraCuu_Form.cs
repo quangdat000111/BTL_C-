@@ -13,6 +13,14 @@ namespace BTLWin
 {
     public partial class TraCuu_Form : Form
     {
+        /*
+         * btnTag để lưu nút button con nào đc kích hoạt
+         * 1: Tra cứu môn học
+         * 2: Tra cứu lớp
+         * 3: Tra cứu giảng viên
+         * 4: Tra cứu lớp môn học
+         * 5: Tra cứu sinh viên
+         */
         public int btnTag { set; get; }
 
         public TraCuu_Form()
@@ -33,6 +41,7 @@ namespace BTLWin
             layDuLieu();
         }
 
+        //Hàm layDuLieu dùng để load dữ liệu vào
         private void layDuLieu()
         {
             string query;
@@ -40,7 +49,7 @@ namespace BTLWin
             {
                 case 1:
                     query = "SELECT * FROM MONHOC";
-                    layDanhSachMonHoc(query);
+                    layDanhSachMonHoc(query);          
                     break;
                 case 2:
                     query = "SELECT * FROM LOP";
@@ -62,10 +71,13 @@ namespace BTLWin
             btnHuyKQ.Visible = false;
         }
 
+        //Hàm trả laydanhsach trả về kết quả câu lệnh truy vấn query rồi nạp vào datagridview
         public void layDanhSachLop(string query)
         {
             lblTimKiem.Text = "Tìm kiếm theo mã lớp";
             dataGridView1.DataSource = new Database().SelectData(query);
+            lblSoLuong.Text = "Số lượng lớp";
+            lblSo.Text = dataGridView1.RowCount.ToString();
             if (dataGridView1.DataSource != null)
             {
                 dataGridView1.Columns[0].HeaderText = "Mã lớp";
@@ -80,6 +92,8 @@ namespace BTLWin
         {
             lblTimKiem.Text = "Tìm kiếm theo mã môn";
             dataGridView1.DataSource = new Database().SelectData(query);
+            lblSoLuong.Text = "Số lượng môn học";
+            lblSo.Text = dataGridView1.RowCount.ToString();
             if (dataGridView1.DataSource != null)
             {
                 dataGridView1.Columns[0].HeaderText = "Mã môn học";
@@ -92,6 +106,8 @@ namespace BTLWin
         {
             lblTimKiem.Text = "Tìm kiếm theo mã giảng viên";
             dataGridView1.DataSource = new Database().SelectData(query);
+            lblSoLuong.Text = "Số lượng giảng viên";
+            lblSo.Text = dataGridView1.RowCount.ToString();
             if (dataGridView1.DataSource != null)
             {
                 dataGridView1.Columns[0].HeaderText = "Mã giảng viên";
@@ -105,11 +121,13 @@ namespace BTLWin
 
         public void layDanhSachLopTheoMon(string query)
         {
-            lblTimKiem.Text = "Tìm kiếm theo mã lớp";
+            lblTimKiem.Text = "Tìm kiếm theo mã lớp môn học";
             dataGridView1.DataSource = new Database().SelectData(query);
+            lblSoLuong.Text = "Số lượng lớp theo môn học";
+            lblSo.Text = dataGridView1.RowCount.ToString();
             if (dataGridView1.DataSource != null)
             {
-                dataGridView1.Columns[0].HeaderText = "Mã lớp";
+                dataGridView1.Columns[0].HeaderText = "Mã lớp môn học";
                 dataGridView1.Columns[1].HeaderText = "Mã môn học";
                 dataGridView1.Columns[2].HeaderText = "Mã giảng viên";
                 dataGridView1.Columns[3].HeaderText = "Phòng học";
@@ -123,6 +141,8 @@ namespace BTLWin
         {
             lblTimKiem.Text = "Tìm kiếm theo mã sinh viên";
             dataGridView1.DataSource = new Database().SelectData(query);
+            lblSoLuong.Text = "Số lượng sinh viên";
+            lblSo.Text = dataGridView1.RowCount.ToString();
             if (dataGridView1.DataSource != null)
             {
                 dataGridView1.Columns[0].HeaderText = "Mã lớp";
@@ -135,16 +155,19 @@ namespace BTLWin
             }
         }
 
+        //Hàm thực hiện tìm kiếm
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
+            //Nếu ô text có dữ liệu thì thực hiện tìm kiếm
             if (textBox1.Text != "")
             {
                 string search = textBox1.Text.ToString().Trim();
+                //Biến query chính là câu lệnh truy vấn
                 string query;
                 switch (btnTag)
                 {
                     case 1:
-                        query = "EXEC TimKiem_Mon '" + search + "'";
+                        query = "EXEC TimKiem_MonHoc '" + search + "'";
                         layDanhSachMonHoc(query);
                         break;
                     case 2:
@@ -160,7 +183,7 @@ namespace BTLWin
                         layDanhSachLopTheoMon(query);
                         break;
                     case 5:
-                        query = "EXEC TimKiem_SinhVien_TheoMaSV '" + search + "'";
+                        query = "EXEC TimKiem_SinhVien '" + search + "'";
                         layDanhSachSinhVien(query);
                         break;
                 }

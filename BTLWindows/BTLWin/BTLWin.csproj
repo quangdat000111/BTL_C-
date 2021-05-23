@@ -119,6 +119,9 @@
     <EmbeddedResource Include="QuanLyDiem.resx">
       <DependentUpon>QuanLyDiem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyTaiKhoan_Form.resx">
+      <DependentUpon>QuanLyTaiKhoan_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TaiKhoan_Form.resx">
       <DependentUpon>TaiKhoan_Form.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TraCuu_Form.resx">
       <DependentUpon>TraCuu_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XemDiem_Form.resx">
+      <DependentUpon>XemDiem_Form.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="CSDL\qldsv.bacpac" />
     <None Include="packages.config" />
