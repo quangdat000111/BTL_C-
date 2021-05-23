@@ -50,11 +50,13 @@ namespace BTLWin
         }
 
         //Load lại thông tin form
+        //Thực hiện đẩy thông tin điểm vào datagridview2 dựa trên môn đc chọn bên datagridview1, cập nhật số lg sinh viên
         public void load()
         {
             try
             {
                 dataGridView2.ReadOnly = false;
+                //Lấy ra thông tin môn học được chọn ở datagridview1 (currentCell là ô đang được chọn)
                 if (dataGridView1.CurrentCell != null)
                 {
                     int row, col;
@@ -62,6 +64,7 @@ namespace BTLWin
                     col = dataGridView1.CurrentCell.ColumnIndex;
                     MaMH = dataGridView1.Rows[row].Cells[0].Value.ToString();
                     txtTimKiem.Clear();
+                    //Nếu ô hợp lệ thì lấy MaMH rồi đẩy điểm của môn học đấy vào datagridview2, tính số sinh viên
                     if (row >= 0 && col >= 0)
                     {
                         DataTable dt = new Database().SelectData("EXEC TimKiem_Diem_TheoMaMH '" + MaMH + "'");
@@ -72,15 +75,17 @@ namespace BTLWin
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
             }
             finally
             {
+                //isSaved= true: Nghĩa là không có thay đổi dữ liệu trên datagridview2, dữ liệu đã được lưu
                 isSaved = true;
+                //không cho phép sửa trên datagridview2
                 dataGridView2.ReadOnly = true;
             }
         }
 
+        //Kiểm tra dữ liệu khi nhập vào từ bàn phím hoặc từ exel
         public int KiemTraDuLieu()
         {
             try
@@ -128,6 +133,12 @@ namespace BTLWin
                             else if (diemtb >= 4.0) dataGridView2.Rows[i].Cells[5].Value = "D";
                             else if (diemtb < 4) dataGridView2.Rows[i].Cells[5].Value = "F";
                             dataGridView2.Rows[i].Cells[4].Value = diemtb + "";
+                        }
+                        else
+                        {
+                            error = error + (i + 1) + " ";
+                            //Thêm cột lỗi vào danh sách dòng lỗi e
+                            e.Add(i);
                         }
                         DataTable dt = new DataTable();
                         //Biến check dùng để lưu trạng thái dữ liệu
@@ -230,6 +241,7 @@ namespace BTLWin
             return 1;
         }
 
+        //Hàm xóa dòng dữ liệu trong datagridview
         public void Xoa(String masv, String mamh)
         {
             //Kiểm tra xem có chuỗi nào rỗng không, nếu có thì dữ liệu không hợp lệ
@@ -237,8 +249,12 @@ namespace BTLWin
             {
                 if (masv.Length != 0 && mamh.Length != 0)
                 {
-                    //Câu lệnh cmd sẽ kiểm tra xem đầu điểm này tồn tại không
-                    //Nếu tồn tại thì xóa, nếu không thì bỏ qua
+                    /*
+                     * Câu lệnh cmd sẽ kiểm tra xem đầu điểm này tồn tại không
+                     * Nếu tồn tại thì xóa, nếu không thì bỏ qua
+                     * -- Vì khi thực hiện xóa, có thể dòng dữ liệu vừa xóa có thể vẫn chưa cập nhật vào CSDL mà chỉ có trên datagridview2
+                     */
+
                     new Database().ExecCmd("EXEC Delete_Diem '" + masv + "', '" + mamh + "'");
                 }
             }
@@ -248,6 +264,7 @@ namespace BTLWin
             }
         }
 
+        //Hàm import file exel, trả về là một bảng dữ liệu
         public DataTable Import()
         {
             using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Excel Workbook|*xlsx", ValidateNames = true })
@@ -290,6 +307,7 @@ namespace BTLWin
 
         private void QuanLyDiem_Load(object sender, EventArgs e)
         {
+            //Đưa ra bảng danh sách môn học vào datagridview1, rồi thực hiện hàm load
             try
             {
                 dataGridView1.DataSource = new Database().SelectData("EXEC TimKiemMonHoc_TheoMaGV '"+this.username+"'");
@@ -306,29 +324,29 @@ namespace BTLWin
             lblTongSV.Text = dataGridView2.RowCount + " sinh viên";
             */
         }
-
+        
+        //Khi click vào một môn học trong datagridview1, điểm của môn học đó sẽ đẩy vào datagridview2
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
+                //Kiểm tra Cell có hợp lệ không
                 if (e.RowIndex > -1)
                 {
+                    /*Kiểm tra xem dữ liệu được lưu chưa
+                     * isSaved: true thì dữ liệu đã được lưu
+                     * isSaved: false thì dữ liệu chưa được lưu, thực hiện hỏi người dùng muốn lưu không
+                     */
                     if (!isSaved)
                     {
                         DialogResult result = MessageBox.Show("Thông tin bạn vừa cập nhập chưa được lưu. \nBạn có muốn lưu chúng không ?", "Thông báo",
                                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        //Nếu người dùng muốn lưu thì thực hiện lưu, không thì hủy những thay đổi
                         if (result == DialogResult.Yes)
                         {
                             btnLuu_Click(sender, e);
                         }
-                        dataGridView2.AllowUserToAddRows = false;
-                        dataGridView2.AllowUserToDeleteRows = false;
-                        isSaved = true;
                     }
-
-                    dataGridView2.DataSource = new Database().SelectData("EXEC TimKiem_Diem_TheoMaMH '"
-                        + dataGridView1.Rows[e.RowIndex].Cells[0].Value + "'");
-                    lblTongSV.Text = dataGridView2.RowCount.ToString() + " sinh viên";
                 }
                 load();
             }
@@ -337,6 +355,7 @@ namespace BTLWin
             }
         }
 
+        //Hàm được thực hiện khi bắt đầu edit dữ liệu trong datagridview, tự động cập nhật mã sinh viên
         private void dataGridView2_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             try
@@ -351,6 +370,7 @@ namespace BTLWin
             }
         }
 
+        //Hàm được thực hiện khi kết thức edit, kiểm tra dữ liệu có là kiểu số không, nếu là kiểu số thì tự động tính điểm TB và điểm chữ
         private void dataGridView2_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -381,6 +401,7 @@ namespace BTLWin
             }
         }
 
+        //Hàm được thực hiện khi đang edit, kiểm tra dữ liệu có hợp lệ không
         private void dataGridView2_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             //Nếu đang nhập ô diemTX và diemKTHP
@@ -409,6 +430,8 @@ namespace BTLWin
             }
         }
 
+
+        //Hàm nhập exel, thực hiện đẩy file exel vào datagridview2
         private void btnNhapExcel_Click(object sender, EventArgs e)
         {
             DataTable dt = new DataTable();
@@ -420,6 +443,7 @@ namespace BTLWin
             }
         }
 
+        //Hàm xuất exel
         private void btnXuatFile_Click(object sender, EventArgs e)
         {
             try
@@ -504,17 +528,18 @@ namespace BTLWin
             }
         }
 
+        //Hàm reset, thực hiện xóa toàn bộ nhưng thay đổi chưa được lưu và load lại dữ liệu
         private void btnReset_Click(object sender, EventArgs e)
         {
             load();
         }
 
+        //Hàm tìm kiếm theo mã sinh viên
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
+            //Nếu ô text không trống, thực hiện tìm sinh viên theo mã sinh viên
             if (txtTimKiem.Text != "")
             {
-                dataGridView2.ReadOnly = false;
-
                 DataTable dt = new Database().SelectData("EXEC TimKiem_Diem '" + txtTimKiem.Text + "', '" + MaMH + "'");
                 dataGridView2.DataSource = dt;
                 btnHuyKQ.Visible = true;
@@ -525,22 +550,27 @@ namespace BTLWin
                 dataGridView2.Columns[3].HeaderText = "Điểm thi kết thúc học phần";
                 dataGridView2.Columns[4].HeaderText = "Điểm trung bình";
                 dataGridView2.Columns[5].HeaderText = "Điểm chữ";
-                
             }
         }
 
+        //Hàm hủy kết quả tìm kiếm
         private void btnHuyKQ_Click(object sender, EventArgs e)
         {
             load();
         }
-
+        
+        //Hàm lưu sự thay đổi
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            
             try
             {
+                /*
+                 * Kiểm tra xem dữ liệu được lưu chưa
+                 * Nếu chưa được lưu thì thực hiện lưu dữ liệu
+                 */
                 if (!isSaved)
                 {
+                    //Nếu KiemTraDuLieu trả về 1 thì thực hiện lưu, lếu trả về 0 thì thông báo lưu thất bại
                     int check;
                     check = KiemTraDuLieu();
                     if (check == 1)
@@ -550,6 +580,12 @@ namespace BTLWin
                         //Nếu đầu điểm không tồn tại: thực hiện thêm mới đầu điểm
                         try
                         {
+                            /*
+                             * Nguyên tắc hoạt động của procedure Update_Diem:
+                             * Nếu đầu điểm này đã tồn tại trong CSDL thì thực hiện update
+                             * Nếu đàu điểm này chưa tồn tại thì thực hiện insert
+                             * Vì các lỗi đã được kiểm tra tại KiemTraDuLieu nên dữ liệu đầu vào là hoàn toàn chính xác
+                             */
                             for (int i = 0; i < dataGridView2.RowCount - 1; i++)
                             {
                                 DiemSV diem = new DiemSV();
@@ -562,7 +598,6 @@ namespace BTLWin
                                 new Database().ExecCmd("EXEC Update_Diem '" + diem.MaSV + "', '" + diem.MaMH + "', " + diem.DiemTX + ", " + diem.DiemKTHP + ", " + diem.DiemTB + ", '" + diem.DiemChu + "'");
                             }
                             MessageBox.Show("Cập nhật thành công");
-                            //Xóa sạch list update
                             load();
                         }
                         catch (Exception ex)
@@ -586,6 +621,7 @@ namespace BTLWin
             }
         }
 
+        //Hàm chỉnh sửa cho phép chỉnh sửa trên datagridview2, đưa isaved= false (Nghĩa là dữ liệu chưa đc lưu)
         private void btnChinhSua_Click(object sender, EventArgs e)
         {
             dataGridView2.ReadOnly = false;
@@ -596,10 +632,12 @@ namespace BTLWin
             isSaved = false;
         }
 
+        //Hàm xóa thực hiện nhiệm vụ xóa
         private void btnXoa_Click(object sender, EventArgs e)
         {
             try
             {
+                //Lấy MaSV và MaMH điểm cần xóa
                 int rowindex = dataGridView2.CurrentCell.RowIndex;
                 DiemSV diemxoa = new DiemSV();
                 diemxoa.MaSV = dataGridView2.Rows[rowindex].Cells[0].Value.ToString();
@@ -608,12 +646,14 @@ namespace BTLWin
                 DialogResult a = MessageBox.Show("Bạn muốn xóa đầu điểm này ra khỏi danh sách?", "Hỏi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (a == DialogResult.Yes)
                 {
+                    /*
+                     * Thực hiện xóa trong csdl
+                     */
                     Xoa(diemxoa.MaSV, diemxoa.MaMH);
+                    //Xóa trên datagridview
                     dataGridView2.Rows.RemoveAt(rowindex);
                 }
-                else if (a == DialogResult.No)
-                {
-                }
+                //Ngược lại thì hủy
                 else
                 {
                     return;
