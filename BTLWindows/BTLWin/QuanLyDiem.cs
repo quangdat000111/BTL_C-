@@ -318,10 +318,9 @@ namespace BTLWin
                         DialogResult result = MessageBox.Show("Thông tin bạn vừa cập nhập chưa được lưu. \nBạn có muốn lưu chúng không ?", "Thông báo",
                                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                         if (result == DialogResult.Yes)
-                        {//Cập nhập thông tin
-
+                        {
+                            btnLuu_Click(sender, e);
                         }
-                        dataGridView2.ReadOnly = true;
                         dataGridView2.AllowUserToAddRows = false;
                         dataGridView2.AllowUserToDeleteRows = false;
                         isSaved = true;
@@ -331,6 +330,7 @@ namespace BTLWin
                         + dataGridView1.Rows[e.RowIndex].Cells[0].Value + "'");
                     lblTongSV.Text = dataGridView2.RowCount.ToString() + " sinh viên";
                 }
+                load();
             }
             catch (Exception ex)
             {
