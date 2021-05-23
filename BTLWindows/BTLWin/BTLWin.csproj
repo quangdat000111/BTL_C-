@@ -64,6 +64,12 @@
     <Compile Include="QuanLyDiem.Designer.cs">
       <DependentUpon>QuanLyDiem.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuanLyTaiKhoan_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyTaiKhoan_Form.Designer.cs">
+      <DependentUpon>QuanLyTaiKhoan_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="TaiKhoan_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +109,12 @@
     </Compile>
     <Compile Include="TraCuu_Form.Designer.cs">
       <DependentUpon>TraCuu_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XemDiem_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="XemDiem_Form.Designer.cs">
+      <DependentUpon>XemDiem_Form.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="QuanLyDiem.resx">
       <DependentUpon>QuanLyDiem.cs</DependentUpon>

@@ -13,9 +13,21 @@ namespace BTLWin
 {
     public partial class MainForm : Form
     {
+        /*
+         * mov, movX, movY giống trong form DangNhap
+         * accountType là lại tài khoản
+         * 0 : Giảng viên
+         * 1 : Sinh viên
+         * 2 : Quản trị viên
+         */
         bool mov;
         int movX, movY, accountType;
 
+        /*
+         * currentChildForm là form con được kích hoạt hiển thị trong MainForm
+         * currentButton là button được chọn
+         * userName, password, id là thông tin của người đăng nhập
+         */
         Form currentChildForm;
         Button currentButton;
         string userName, password, id;
@@ -31,6 +43,10 @@ namespace BTLWin
             this.id = id;
             this.accountType = accountType;
         }
+
+        /*
+         * btnMaximized_Click, btnExit_Click, btnMinimized_Click dùng điểu khiển form, để phóng to, thu nhỏ, thoát, thu vào thanh taskbar
+         */
         private void btnMaximized_Click(object sender, EventArgs e)
         {
             if (this.WindowState != FormWindowState.Maximized)
@@ -53,31 +69,75 @@ namespace BTLWin
             this.WindowState = FormWindowState.Minimized;
         }
 
+        //Mouseup, down, move tương tự bên form DangNhap
         private void panelTitleBar_MouseUp(object sender, MouseEventArgs e)
         {
             mov = false;
         }
+
+        private void MainForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mov)
+            {
+                this.SetDesktopLocation(MousePosition.X - movX, MousePosition.Y - movY);
+            }
+        }
+
+        private void MainForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            mov = true;
+            movX = e.X;
+            movY = e.Y;
+        }
+
+        private void MainForm_MouseUp(object sender, MouseEventArgs e)
+        {
+            mov = false;
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
-            this.Text = String.Empty;
-            this.lblWelcome.Text = "Chào mừng, " + this.userName;
-            this.ControlBox = false;
-            this.DoubleBuffered = true;
-            this.MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
-            panel2.Visible = false;
-            panel3.Visible = false;
-            activeChildForm(new TrangChu_Form(id));
-            activeButton(btnTrangChu, Color.CadetBlue);
-            switch (accountType)
+            try
             {
-                case 0:
-                    btnQuanLy.Text = "Kết quả học tập";
-                    break;
-                case 2:
+                //Text của form. để trống
+                this.Text = String.Empty;
+                this.lblWelcome.Text = "Chào mừng, " + this.userName;
+                this.ControlBox = false;
+                this.DoubleBuffered = true;
+                this.MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
+                //ẩn các nút menu con
+                panel2.Visible = false;
+                panel3.Visible = false;
+                if (accountType== 0)
+                {
+                    activeChildForm(new TrangChu_Form(id));
+                    activeButton(btnTrangChu, Color.CadetBlue);
+                }
+                else if(accountType == 1)
+                {
+                    btnTrangChu.Visible = false;
+                    btnGiangVien_Submenu.Visible = false;
+                    btnQuanLy.Text = "Tra cứu điểm";
+                    activeChildForm(new XemDiem_Form());
+                    activeButton(btnQuanLy, Color.CadetBlue);
+                }
+                else if(accountType == 2)
+                {
+                    btnTrangChu.Visible = false;
+                    btnGiangVien_Submenu.Visible = false;
                     btnQuanLy.Visible = false;
-                    break;
+                    btnTraCuu.Visible = false;
+                    btnHoTro.Visible = false;
+                    btnTaiKhoan.Text = "Quản lý tài khoản";
+                    activeChildForm(new QuanLyTaiKhoan_Form());
+                    activeButton(btnTaiKhoan, Color.CadetBlue);
+                }
+                this.WindowState = FormWindowState.Maximized;
             }
-            btnQuanLy.Visible = true;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnMonHoc_Submenu_Click(object sender, EventArgs e)
@@ -181,26 +241,6 @@ namespace BTLWin
         {
             activeButton(sender, Color.LightSeaGreen);
             activeChildForm(new TrangChu_Form(id));
-        }
-
-        private void MainForm_MouseMove(object sender, MouseEventArgs e)
-        {
-            if(mov)
-            {
-                this.SetDesktopLocation(MousePosition.X - movX, MousePosition.Y - movY);
-            }
-        }
-
-        private void MainForm_MouseDown(object sender, MouseEventArgs e)
-        {
-            mov = true;
-            movX = e.X;
-            movY = e.Y;
-        }
-
-        private void MainForm_MouseUp(object sender, MouseEventArgs e)
-        {
-            mov = false;
         }
 
         private void btnDangXuat_Click(object sender, EventArgs e)
