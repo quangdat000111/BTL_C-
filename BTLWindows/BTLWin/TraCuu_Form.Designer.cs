@@ -111,7 +111,6 @@
             this.btnTimKiem.TabIndex = 1;
             this.btnTimKiem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTimKiem.UseVisualStyleBackColor = false;
-            this.btnTimKiem.Visible = false;
             this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
             // btnHuyKQ

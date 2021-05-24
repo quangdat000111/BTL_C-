@@ -11,6 +11,7 @@ namespace Data
 {
     class Database
     {
+        // Chuỗi link tới CSDL
         private const string StringConnection = @"Data Source=DESKTOP-GCR1PAP;Initial Catalog=QLDSV;Integrated Security=True";
         private SqlConnection conn;
         private SqlCommand cmd;
@@ -18,6 +19,7 @@ namespace Data
         
         public Database()
         {
+            //Nếu không link tới được thì thông báo lỗi
             conn = new SqlConnection(StringConnection);
             if(conn == null)
             {
@@ -26,6 +28,8 @@ namespace Data
             }
             conn.Close();
         }
+
+        //Thực hiện cây lệnh SelectData đầu vào là câu lệnh truy vấn, trả về 1 bảng dữ liệu
         public DataTable SelectData(string query)
         {
             try
@@ -46,6 +50,8 @@ namespace Data
                 conn.Close();
             }
         }
+
+        //Thực hiện câu lệnh truy vấn , không trả về giá trị
         public int ExecCmd(string query)
         {          
             try

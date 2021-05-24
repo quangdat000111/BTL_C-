@@ -23,7 +23,7 @@ namespace BTLWin
         * true khi dữ liệu khi dữ liệu đã được lưu
         * false khi dữ liệu khi chưa đc lưu
         */
-        bool isSaved, luuExcel;
+        bool isSaved;
 
         /*
          * MaMH lưu mã môn học được chọn
@@ -91,6 +91,7 @@ namespace BTLWin
             try
             {
                 //Kiểm tra xem bảng dữ liệu hợp lệ chưa
+                //Dùng cho việc nếu file exel nhập vào sai thì kết thúc luôn
                 if (dataGridView2.ColumnCount != 6) return 0;
                 if (
                 dataGridView2.Columns[0].HeaderText != "Mã sinh viên" ||
@@ -108,9 +109,9 @@ namespace BTLWin
                 String error = "";
                 //List các dòng dữ liệu bị lỗi
                 List<int> e = new List<int>();
-                //foreach duyệt datagridview để kiểm tra từng dòng dữ liệu
                 try
                 {
+                    //Duyệt bảng dữ liệu
                     for (int i = 0; i < dataGridView2.RowCount - 1; i++)
                     {
                         //Kiểm tra hợp lệ của các đầu điểm
@@ -148,14 +149,11 @@ namespace BTLWin
                         //Độ dài chuỗi của các cột
                         int length_cell0 = dataGridView2.Rows[i].Cells[0].Value.ToString().Length;
                         int length_cell1 = dataGridView2.Rows[i].Cells[1].Value.ToString().Length;
-                        int length_cell2 = dataGridView2.Rows[i].Cells[2].Value.ToString().Length;
-                        int length_cell3 = dataGridView2.Rows[i].Cells[3].Value.ToString().Length;
-                        int length_cell4 = dataGridView2.Rows[i].Cells[4].Value.ToString().Length;
-                        int length_cell5 = dataGridView2.Rows[i].Cells[5].Value.ToString().Length;
+         
                         //Kiểm tra xem có cột nào trống không
                         //Nếu phát hiện trống thì thêm vào bảng dữ liệu lỗi e
                         //Nếu không trống thực hiện tiếp câu lệnh if
-                        if (length_cell0 != 0 && length_cell1 != 0 && length_cell2 != 0 && length_cell3 != 0 && length_cell4 != 0 && length_cell5 != 0)
+                        if (length_cell0 != 0 && length_cell1 != 0 )
                         {
                             //Mã sinh viên
                             String masv = dataGridView2.Rows[i].Cells[0].Value.ToString();
@@ -192,10 +190,14 @@ namespace BTLWin
                         }
                         else
                         {
-                            //Nếu có 1 cột bất kỳ trống, dữ liệu không hợp lệ
-                            error = error + (i + 1) + " ";
-                            //Thêm cột lỗi vào danh sách dòng lỗi e
-                            e.Add(i);
+                            //Nếu dòng dữ liệu này chưa có trong bảng lỗi
+                            if(e.IndexOf(i) == -1)
+                            {
+                                //Nếu có 1 cột bất kỳ trống, dữ liệu không hợp lệ
+                                error = error + (i + 1) + " ";
+                                //Thêm cột lỗi vào danh sách dòng lỗi e
+                                e.Add(i);
+                            }
                         }
                     }
                 }
@@ -434,18 +436,26 @@ namespace BTLWin
         //Hàm nhập exel, thực hiện đẩy file exel vào datagridview2
         private void btnNhapExcel_Click(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            dt = Import();
-            if (dt != null)
+            try
             {
-                dataGridView2.DataSource = dt;
-                isSaved = false;
+                DataTable dt = new DataTable();
+                dt = Import();
+                if (dt != null)
+                {
+                    dataGridView2.DataSource = dt;
+                    isSaved = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         //Hàm xuất exel
         private void btnXuatFile_Click(object sender, EventArgs e)
         {
+
             try
             {
                 if (!isSaved)
@@ -480,7 +490,7 @@ namespace BTLWin
                     worksheet.Cells[9, 5] = "Điểm thi kết thúc học phần";
                     worksheet.Cells[9, 6] = "Điểm trung bình";
                     worksheet.Cells[9, 7] = "Điểm chữ";
-                    for (int i = 0; i < dataGridView2.RowCount; i++)
+                    for (int i = 0; i < dataGridView2.RowCount -1; i++)
                     {
                         worksheet.Cells[i + 10, 1] = i + 1;
                         for (int j = 0; j < 6; j++)
@@ -537,19 +547,26 @@ namespace BTLWin
         //Hàm tìm kiếm theo mã sinh viên
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            //Nếu ô text không trống, thực hiện tìm sinh viên theo mã sinh viên
-            if (txtTimKiem.Text != "")
+            try
             {
-                DataTable dt = new Database().SelectData("EXEC TimKiem_Diem '" + txtTimKiem.Text + "', '" + MaMH + "'");
-                dataGridView2.DataSource = dt;
-                btnHuyKQ.Visible = true;
-                lblTongSV.Text = dt.Rows.Count + " sinh viên";
-                dataGridView2.Columns[0].HeaderText = "Mã sinh viên";
-                dataGridView2.Columns[1].HeaderText = "Mã môn học";
-                dataGridView2.Columns[2].HeaderText = "Điểm thường xuyên";
-                dataGridView2.Columns[3].HeaderText = "Điểm thi kết thúc học phần";
-                dataGridView2.Columns[4].HeaderText = "Điểm trung bình";
-                dataGridView2.Columns[5].HeaderText = "Điểm chữ";
+                //Nếu ô text không trống, thực hiện tìm sinh viên theo mã sinh viên
+                if (txtTimKiem.Text != "")
+                {
+                    DataTable dt = new Database().SelectData("EXEC TimKiem_Diem '" + txtTimKiem.Text + "', '" + MaMH + "'");
+                    dataGridView2.DataSource = dt;
+                    btnHuyKQ.Visible = true;
+                    lblTongSV.Text = dt.Rows.Count + " sinh viên";
+                    dataGridView2.Columns[0].HeaderText = "Mã sinh viên";
+                    dataGridView2.Columns[1].HeaderText = "Mã môn học";
+                    dataGridView2.Columns[2].HeaderText = "Điểm thường xuyên";
+                    dataGridView2.Columns[3].HeaderText = "Điểm thi kết thúc học phần";
+                    dataGridView2.Columns[4].HeaderText = "Điểm trung bình";
+                    dataGridView2.Columns[5].HeaderText = "Điểm chữ";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -608,7 +625,6 @@ namespace BTLWin
                     }
                     else
                     {
-                        load();
                         MessageBox.Show("Cập nhật thất bại");
                         return;
                     }
