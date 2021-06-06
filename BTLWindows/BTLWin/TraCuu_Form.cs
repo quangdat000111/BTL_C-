@@ -145,13 +145,13 @@ namespace BTLWin
             lblSo.Text = dataGridView1.RowCount.ToString();
             if (dataGridView1.DataSource != null)
             {
-                dataGridView1.Columns[0].HeaderText = "Mã lớp";
-                dataGridView1.Columns[1].HeaderText = "Mã sinh viên";
-                dataGridView1.Columns[2].HeaderText = "Họ tên sinh viên";
-                dataGridView1.Columns[3].HeaderText = "Ngày sinh";
-                dataGridView1.Columns[4].HeaderText = "Giới tính";
-                dataGridView1.Columns[5].HeaderText = "Địa chỉ";
-                dataGridView1.Columns[6].HeaderText = "Số điện thoại";
+                dataGridView1.Columns[0].HeaderText = "Mã sinh viên";
+                dataGridView1.Columns[1].HeaderText = "Họ tên sinh viên";
+                dataGridView1.Columns[2].HeaderText = "Ngày sinh";
+                dataGridView1.Columns[3].HeaderText = "Giới tính";
+                dataGridView1.Columns[4].HeaderText = "Địa chỉ";
+                dataGridView1.Columns[5].HeaderText = "Số điện thoại";
+                dataGridView1.Columns[6].HeaderText = "Mã lớp";
             }
         }
 

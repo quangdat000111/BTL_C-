@@ -377,11 +377,11 @@
             // 
             // lblWelcome
             // 
-            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWelcome.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblWelcome.Location = new System.Drawing.Point(12, 130);
             this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(275, 33);
+            this.lblWelcome.Size = new System.Drawing.Size(282, 33);
             this.lblWelcome.TabIndex = 1;
             this.lblWelcome.Text = "Chào mừng, Username";
             this.lblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

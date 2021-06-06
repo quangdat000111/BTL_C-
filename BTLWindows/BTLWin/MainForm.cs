@@ -271,6 +271,7 @@ namespace BTLWin
             }
         }
 
+
         private void btnDangXuat_Click(object sender, EventArgs e)
         {
             this.Hide();
